@@ -1,0 +1,9 @@
+.popup__fieled-error {
+    visibility: hidden;
+  height: 29px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  color: #FF0000;
+  margin-top: 5px;
+}
