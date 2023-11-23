@@ -1,8 +1,7 @@
-import { titlePopup, imgPopup, popupImage, template } 
-from "./index.js";
+import { titlePopup, imgPopup, popupImage, template } from "./index.js";
 import { openPopup } from "./modal.js"
   
-export const createCardTemplate = (data) => { 
+export const createCardTemplate = (data, likeCard, deleteCard, openCard) => { 
     const card = template.content.cloneNode(true); 
     const image = card.querySelector(".elements__image"); 
     const name = card.querySelector(".elements__name"); 
@@ -11,16 +10,19 @@ export const createCardTemplate = (data) => {
     name.textContent = data.name; 
   
     const likeButton = card.querySelector(".elements__icon"); 
-    likeButton.addEventListener("click", function (evt) {  
-      evt.target.classList.toggle("elements__icon_active");   
-    });  
+    likeButton.addEventListener("click", likeCard);  
   
     const deleteButton = card.querySelector(".elements__delete"); 
     deleteButton.addEventListener("click", deleteCard); 
+    
     const buttonOpenPopupImage = card.querySelector(".elements__image");  
     buttonOpenPopupImage.addEventListener("click", () => openCard(data)) 
     return card;  
   } 
+
+  export const likeCard = (evt) => {
+    evt.target.classList.toggle("elements__icon_active");
+  }
     
   export const deleteCard = (e) => { 
     const card = e.target.closest(".elements__card"); 

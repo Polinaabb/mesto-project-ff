@@ -1,61 +1,76 @@
-import '../pages/index.css';
+import "../pages/index.css";
 import { initialCards } from "./cards.js";
 import { createCardTemplate } from "./card.js";
-import { popupCloseOverlay, openPopupEdit, openPopupAdd, closePopup } from "./modal.js";
+import { closePopupByOverlayClick, 
+  openPopup, closePopup } from "./modal.js";
 
-
-export const popupEdit = document.querySelector(".popup_edit");
-export const popupAdd = document.querySelector(".popup_add");
+const popupEditProfile = document.querySelector(".popup_edit");
+const popupAddCard = document.querySelector(".popup_add");
 export const popupImage = document.querySelector(".popup_image");
-export const buttonEdit = document.querySelector(".profile__edit-button");
-export const buttonAdd = document.querySelector(".profile__add-button");
-export const profileName = document.querySelector(".profile__name");
-export const profileDescription = document.querySelector(".profile__description");
-export const nameInput = document.querySelector(".popup__fieled_type_name");
-export const jobInput = document.querySelector(".popup__fieled_type_job");
-export const elements = document.querySelector(".elements");
+const openButtonEdit = document.querySelector(".profile__edit-button");
+const openButtonAdd = document.querySelector(".profile__add-button");
+const profileName = document.querySelector(".profile__name"); 
+const profileDescription = document.querySelector(".profile__description");
+const nameInput = document.querySelector(".popup__fieled_type_name");
+const jobInput = document.querySelector(".popup__fieled_type_job");
+const elements = document.querySelector(".elements");
 export const titlePopup = document.querySelector(".popup__name");
 export const imgPopup = document.querySelector(".popup__image");
 export const titleCard = document.querySelector(".elements__name");
 export const imageCard = document.querySelector(".elements__image");
 export const template = document.querySelector(".template");
 const titleInput = document.querySelector(".popup__fieled_type_title");
-const linkInput = document.querySelector(".popup__fieled_type_link")
-export const popupFormEdit = document.querySelector(".popup__container-edit")
-export const popupFormAdd = document.querySelector(".popup__container-add");
+const linkInput = document.querySelector(".popup__fieled_type_link");
+const formEditProfile = document.querySelector(".popup__container-edit");
+const formAddCard = document.querySelector(".popup__container-add");
+const closeButton = document.querySelectorAll(".popup__close");
 
 function handleFormSubmitEdit(evt) {
   evt.preventDefault();
   profileName.textContent = nameInput.value;
   profileDescription.textContent = jobInput.value;
-  closePopup(popupEdit);
+  closePopup(popupEditProfile);
 };
 
 function handleFormSubmitAdd(evt) {
   evt.preventDefault();
   const newCard = createCardTemplate({ name: titleInput.value, link: linkInput.value });
-  titleInput.value = "";
-  linkInput.value = "";
+  titleInput.value = ""; 
+  linkInput.value = ""; 
   elements.prepend(newCard);
-  closePopup(popupAdd);
+  closePopup(popupAddCard);
 }
 
-const render = () => {
+const renderInitialCards = () => {
   initialCards.forEach((item) => {
     elements.append(createCardTemplate(item));
   });
 };
 
-render();
+renderInitialCards();
 
+const openPopupEdit = function () { 
+  openPopup(popupEditProfile); 
+  nameInput.value = profileName.textContent; 
+  jobInput.value = profileDescription.textContent; 
+};
 
-buttonEdit.addEventListener("click", openPopupEdit);
-buttonAdd.addEventListener("click", openPopupAdd);
-popupFormEdit.addEventListener('submit', handleFormSubmitEdit);
-popupFormAdd.addEventListener('submit', handleFormSubmitAdd);
-popupEdit.addEventListener("click", popupCloseOverlay);
-popupAdd.addEventListener("click", popupCloseOverlay);
-popupImage.addEventListener("click", popupCloseOverlay);
+const openPopupAdd = function () { 
+  openPopup(popupAddCard); 
+}; 
+
+closeButton.forEach(button => { 
+  const buttonsPopup = button.closest('.popup'); 
+  button.addEventListener('click', () => closePopup(buttonsPopup)); 
+}); 
+
+openButtonEdit.addEventListener("click", openPopupEdit);
+openButtonAdd.addEventListener("click", openPopupAdd);
+formEditProfile.addEventListener('submit', handleFormSubmitEdit);
+formAddCard.addEventListener('submit', handleFormSubmitAdd);
+popupEditProfile.addEventListener("click", closePopupByOverlayClick);
+popupAddCard.addEventListener("click", closePopupByOverlayClick);
+popupImage.addEventListener("click", closePopupByOverlayClick);
 
 
 
