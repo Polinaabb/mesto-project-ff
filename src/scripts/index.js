@@ -1,6 +1,6 @@
 import "../pages/index.css";
 import { initialCards } from "./cards.js";
-import { createCardTemplate } from "./card.js";
+import { createCardTemplate, likeCard, deleteCard, openCard } from "./card.js";
 import { closePopupByOverlayClick, 
   openPopup, closePopup } from "./modal.js";
 
@@ -34,7 +34,7 @@ function handleFormSubmitEdit(evt) {
 
 function handleFormSubmitAdd(evt) {
   evt.preventDefault();
-  const newCard = createCardTemplate({ name: titleInput.value, link: linkInput.value });
+  const newCard = createCardTemplate({ name: titleInput.value, link: linkInput.value }, likeCard, deleteCard, openCard);
   titleInput.value = ""; 
   linkInput.value = ""; 
   elements.prepend(newCard);
@@ -43,7 +43,7 @@ function handleFormSubmitAdd(evt) {
 
 const renderInitialCards = () => {
   initialCards.forEach((item) => {
-    elements.append(createCardTemplate(item));
+    elements.append(createCardTemplate(item, likeCard, deleteCard, openCard));
   });
 };
 
