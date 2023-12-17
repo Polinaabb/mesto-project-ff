@@ -37,15 +37,6 @@ const toggleButtonState = (inputList, buttonElement, settings) => {
   } 
 }
 
-export const clearValidation = (formElement, settings) => {
-  const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector)); 
-  const buttonElement = formElement.querySelector(settings.submitButtonSelector); 
-
-  inputList.reset()
-
-  toggleButtonState(inputList, buttonElement, settings);
-}
-
 const setEventListeners = (formElement, settings) => { 
   const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector)); 
   const buttonElement = formElement.querySelector(settings.submitButtonSelector); 
@@ -66,6 +57,15 @@ const hasInvalidInput = (inputList) => {
   }); 
 } 
 
+export const clearValidation = () => {
+  const formList = Array.from(settings.formSelector);
+  formList.forEach((formElement) => {
+    formElement.addEventListener('submit', (evt) => {
+    evt.preventDefault();
+  });
+  toggleButtonState(inputList, buttonElement, settings)
+});
+  }
 
 export const enableValidation = settings => { 
   const formList = Array.from(document.querySelectorAll(settings.formSelector)); 
