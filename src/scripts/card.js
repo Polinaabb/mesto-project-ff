@@ -6,6 +6,7 @@ export const createCardTemplate = (data, likeCard, userId) => {
   const card = template.content.querySelector('.elements__card').cloneNode(true);
   const image = card.querySelector(".elements__image");
   const name = card.querySelector(".elements__name");
+  const like = card.querySelector('.elements__like')
   const likeButton = card.querySelector(".elements__icon");
   const deleteButton = card.querySelector(".elements__delete");
   const buttonOpenPopupImage = card.querySelector(".elements__image");
@@ -17,6 +18,14 @@ export const createCardTemplate = (data, likeCard, userId) => {
   name.textContent = data.name;
 
   const likeQuantity = like.querySelector('.elements__quantity');
+
+  function checkDeleteIcon() {
+    if (data.owner._id !== userId) {
+      deleteButton.style.visibility = "hidden";
+    }
+  }
+
+  checkDeleteIcon()
 
   // проверяем лайкнули ли мы карточку
   const checkLike = () => {

@@ -108,13 +108,14 @@ export const addCard = (data) => {
    })
 }
 
-export const updateAvatar = () => {
-  return fetch(`${config.baseUrl}/cards/me/avatar`, {
+export const updateAvatar = (data) => {
+  return fetch('https://nomoreparties.co/v1/wff-cohort-2/users/me/avatar', {
    method: "PATCH",
    headers: {
      authorization: '6bfe41d7-4de4-47a9-ada4-33f5f31ff7dc',
      "Content-Type": "application/json"
    },
+   body: JSON.stringify(data)
  })
    .then((res) => {
      if (res.ok) {

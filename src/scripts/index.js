@@ -15,7 +15,7 @@ export const popupImage = document.querySelector(".popup_image");
 const popupAvatarProfile = document.querySelector(".popup_avatar");
 const openButtonEdit = document.querySelector(".profile__edit-button");
 const openButtonAdd = document.querySelector(".profile__add-button");
-const openEditAvatar = document.querySelector(".profile__avatar");
+const openEditAvatar = document.querySelector(".profile__avatar_edit");
 export const profileName = document.querySelector(".profile__name");
 export const profileDescription = document.querySelector(".profile__description");
 const profileAvatar = document.querySelector(".profile__avatar")
@@ -46,6 +46,7 @@ export const settings = {
 };
 
 function handleFormSubmitEdit(evt) {
+  renderLoaiding(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   upDateUser({name: nameInput.value, about:  jobInput.value})
   .then((data) => {
@@ -56,11 +57,14 @@ function handleFormSubmitEdit(evt) {
   })
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => renderLoaiding(evt.submitter, 'Сохранить'));
+
   closePopup(popupEditProfile);
 };
 
 function handleFormSubmitAdd(evt) {
+  renderLoaiding(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   addCard({ name: titleInput.value, link: linkInput.value })
   .then((dataNewCard) => {
@@ -72,21 +76,23 @@ function handleFormSubmitAdd(evt) {
   })
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => renderLoaiding(evt.submitter, 'Сохранить'));
 
   closePopup(popupAddCard);
 }
 
 function handleFormSubmitAvatar(evt) {
+  renderLoaiding(evt.submitter, 'Сохранение...');
   evt.preventDefault();
   updateAvatar({ avatar: avatarInput.value })
-  .then((userData) => {
-    console.log(userData);
-   ;
+  .then((data) => {
+    profileAvatar.style = `background-image: url(${data.avatar})`;
   })
   .catch((err) => {
     console.log(err);
-  });
+  })
+  .finally(() => renderLoaiding(evt.submitter, 'Сохранить'));
 
   closePopup(popupAvatarProfile);
 }
@@ -120,20 +126,11 @@ closeButton.forEach(button => {
   button.addEventListener('click', () => closePopup(buttonsPopup));
 });
  
-
-openButtonEdit.addEventListener('click', openPopupEdit);
-openButtonAdd.addEventListener('click', openPopupAdd);
-formEditProfile.addEventListener('submit', handleFormSubmitEdit);
-formAddCard.addEventListener('submit', handleFormSubmitAdd);
-formAvatarProfile.addEventListener('submit', handleFormSubmitAvatar)
-popupEditProfile.addEventListener('click', closePopupByOverlayClick);
-popupAddCard.addEventListener('click', closePopupByOverlayClick);
-popupImage.addEventListener('click', closePopupByOverlayClick);
-openEditAvatar.addEventListener('click', openPopupAvatar);
-
+function renderLoaiding(saveButton, status) {
+  saveButton.textContent = status;
+}
 
 enableValidation(settings);
-
 
 Promise.all([getInitialCards(), getDataUser()])
   .then(([res1, res2]) => {
@@ -141,7 +138,6 @@ Promise.all([getInitialCards(), getDataUser()])
     profileName.textContent = res2.name;
     profileDescription.textContent = res2.about;
     profileAvatar.style.backgroundImage = `url(${res2.avatar})`;
-    console.log(res2.avatar);
   
     res1.forEach((data) => {
       const listItem = createCardTemplate(data, likeCard, userId)
@@ -151,7 +147,17 @@ Promise.all([getInitialCards(), getDataUser()])
   .catch((err) => {
     console.log(err);
   });
-
+  
+openButtonEdit.addEventListener('click', openPopupEdit);
+openButtonAdd.addEventListener('click', openPopupAdd);
+formEditProfile.addEventListener('submit', handleFormSubmitEdit);
+formAddCard.addEventListener('submit', handleFormSubmitAdd);
+formAvatarProfile.addEventListener('submit', handleFormSubmitAvatar);
+popupAvatarProfile.addEventListener('click', closePopupByOverlayClick)
+popupEditProfile.addEventListener('click', closePopupByOverlayClick);
+popupAddCard.addEventListener('click', closePopupByOverlayClick);
+popupImage.addEventListener('click', closePopupByOverlayClick);
+openEditAvatar.addEventListener('click', openPopupAvatar);
 
 // function handleFormSubmitEdit(evt) { 
 //   evt.preventDefault(); 
