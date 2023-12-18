@@ -1,124 +1,172 @@
-<!DOCTYPE html>
+<!doctype html>
 
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Место</title>
-</head>
-
-<body class="page">
-  <div class="popup popup_edit">
-    <div class="popup__container popup__container-edit">
-      <button class="popup__close" type="button">
-      </button>
-      <h2 class="popup__title">Редактировать профиль</h2>
-      <form class="popup__fieleds" name="form">
-        <input type="text" name="name" id="user-fieled" required="text" 
-        minlength="2" maxlength="40" pattern="^[a-zA-Zа-яА-Я\s\-]+$"
-        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-          class="popup__fieled popup__fieled_type_name" placeholder="Имя">
-        <span id="user-fieled-error" class="popup__fieled-error user-fieled-error"></span>
-        <input type="text" name="job" id="job-fieled" required="text" 
-        minlength="2" maxlength="200" pattern="^[a-zA-Zа-яА-Я\s\-]+$"
-        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-          class="popup__fieled popup__fieled_type_job" placeholder="Профессия">
-        <span id="job-fieled-error" class="popup__fieled-error job-fieled-error"></span>
-        <button type="submit" class="popup__save">Сохранить</button>
-      </form>
-    </div>
-  </div>
-  <div class="popup popup_add">
-    <div class="popup__container popup__container-add">
-      <button class="popup__close popup__close_add" type="button">
-      </button>
-      <h2 class="popup__title">Новое место</h2>
-      <form class="popup__fieleds" name="form">
-        <input type="text" name="name" id="name-fieled" required="text" 
-        minlength="2" maxlength="30" pattern="^[a-zA-Zа-яА-Я\s\-]+$"
-        data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
-          class="popup__fieled popup__fieled_type_name popup__fieled_type_title" placeholder="Название">
-        <span id="name-fieled-error" class="popup__fieled-error name-fieled-error"></span>
-        <input type="url" name="fhoto" required="url" id="photo-fieled"
-          class="popup__fieled popup__fieled_type_job popup__fieled_type_link" placeholder="Ссылка на картинку">
-        <span id="photo-fieled-error" class="popup__fieled-error photo-fieled-error"></span>
-        <button type="submit" class="popup__save popup__save_create">Создать</button>
-      </form>
-    </div>
-  </div>
-  <div class="popup popup_image">
-    <div class="popup__img">
-      <img class="popup__image" alt="">
-      <p class="popup__name"></p>
-      <button class="popup__close popup__close_image" type="button">
-      </button>
-    </div>
-  </div>
-  <div class="popup popup_avatar">
-    <div class="popup__container popup__container-avatar">
-      <button class="popup__close popup__close_add" type="button">
-      </button>
-      <h2 class="popup__title">Обновить аватар</h2>
-      <form class="popup__fieleds" name="form">
-        <input type="url" name="avatar" required="url" id="avatar-fieled"
-        class="popup__fieled popup__fieled_type_avatar" placeholder="Ссылка на аватар">
-      <span id="avatar-fieled-error" class="popup__fieled-error avatar-fieled-error"></span>
-        <button type="submit" class="popup__save popup__save_create">Сохранить</button>
-      </form>
-    </div>
-  </div>
-  <div class="popup popup_delete">
-    <div class="popup__container popup__container-delete">
-      <button class="popup__close popup__close_add" type="button">
-      </button>
-      <h2 class="popup__title">Вы уверены?</h2>
-        <button type="submit" class="popup__save popup__save_create">Да</button>
-    </div>
-  </div>
-  <header class="header">
-    <img src="<%=require('./images/header-logo.svg')%>" class="header__logo" alt="Россия">
-  </header>
-  <main class="content">
-    <section class="profile">
-      <div class="profile__information">
-      <div class="profile__information_edit">
-        <div class="profile__avatar"></div>
-        <div class="profile__avatar_edit"></div>
+  <body class="page">
+    <div class="popup popup_edit">
+      <div class="popup__container popup__container-edit">
+        <button class="popup__close" type="button"></button>
+        <h2 class="popup__title">Редактировать профиль</h2>
+        <form class="popup__fieleds" name="form">
+          <input
+            type="text"
+            name="name"
+            id="user-fieled"
+            required="text"
+            minlength="2"
+            maxlength="40"
+            pattern="^[a-zA-Zа-яА-Я\s\-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+            class="popup__fieled popup__fieled_type_name"
+            placeholder="Имя"
+          />
+          <span
+            id="user-fieled-error"
+            class="popup__fieled-error user-fieled-error"
+          ></span>
+          <input
+            type="text"
+            name="job"
+            id="job-fieled"
+            required="text"
+            minlength="2"
+            maxlength="200"
+            pattern="^[a-zA-Zа-яА-Я\s\-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+            class="popup__fieled popup__fieled_type_job"
+            placeholder="Профессия"
+          />
+          <span
+            id="job-fieled-error"
+            class="popup__fieled-error job-fieled-error"
+          ></span>
+          <button type="submit" class="popup__save">Сохранить</button>
+        </form>
       </div>
-        <div class="profile__info">
-          <div class="profile__edit">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__edit-button" type="button">
-            </button>
-          </div>
-          <p class="profile__description">Исследователь океана</p>
-        </div>
-      </div>
-      <button class="profile__add-button" type="button">
-      </button>
-    </section>
-    <section class="elements">
-      <template class="template">
-        <div class="elements__card">
-          <img class="elements__image" alt="">
-          <div class="elements__description">
-            <h2 class="elements__name"></h2>
-            <div class="elements__like">
-            <button class="elements__icon" type="button">
-            </button>
-            <span class="elements__quantity"></span>
-          </div>
-          </div>
-          <button class="elements__delete" type="button">
+    </div>
+    <div class="popup popup_add">
+      <div class="popup__container popup__container-add">
+        <button class="popup__close popup__close_add" type="button"></button>
+        <h2 class="popup__title">Новое место</h2>
+        <form class="popup__fieleds" name="form">
+          <input
+            type="text"
+            name="name"
+            id="name-fieled"
+            required="text"
+            minlength="2"
+            maxlength="30"
+            pattern="^[a-zA-Zа-яА-Я\s\-]+$"
+            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы"
+            class="popup__fieled popup__fieled_type_name popup__fieled_type_title"
+            placeholder="Название"
+          />
+          <span
+            id="name-fieled-error"
+            class="popup__fieled-error name-fieled-error"
+          ></span>
+          <input
+            type="url"
+            name="fhoto"
+            required="url"
+            id="photo-fieled"
+            class="popup__fieled popup__fieled_type_job popup__fieled_type_link"
+            placeholder="Ссылка на картинку"
+          />
+          <span
+            id="photo-fieled-error"
+            class="popup__fieled-error photo-fieled-error"
+          ></span>
+          <button type="submit" class="popup__save popup__save_create">
+            Создать
           </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_image">
+      <div class="popup__img">
+        <img class="popup__image" alt="" />
+        <p class="popup__name"></p>
+        <button class="popup__close popup__close_image" type="button"></button>
+      </div>
+    </div>
+    <div class="popup popup_avatar">
+      <div class="popup__container popup__container-avatar">
+        <button class="popup__close popup__close_add" type="button"></button>
+        <h2 class="popup__title">Обновить аватар</h2>
+        <form class="popup__fieleds" name="form">
+          <input
+            type="url"
+            name="avatar"
+            required="url"
+            id="avatar-fieled"
+            class="popup__fieled popup__fieled_type_avatar"
+            placeholder="Ссылка на аватар"
+          />
+          <span
+            id="avatar-fieled-error"
+            class="popup__fieled-error avatar-fieled-error"
+          ></span>
+          <button type="submit" class="popup__save popup__save_create">
+            Сохранить
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="popup popup_delete">
+      <div class="popup__container popup__container-delete">
+        <button class="popup__close popup__close_add" type="button"></button>
+        <h2 class="popup__title">Вы уверены?</h2>
+        <button type="submit" class="popup__save popup__save_create">Да</button>
+      </div>
+    </div>
+    <header class="header">
+      <img
+        src="<%=require('./images/header-logo.svg')%>"
+        class="header__logo"
+        alt="Россия"
+      />
+    </header>
+    <main class="content">
+      <section class="profile">
+        <div class="profile__information">
+          <div class="profile__information_edit">
+            <div class="profile__avatar"></div>
+            <div class="profile__avatar_edit"></div>
+          </div>
+          <div class="profile__info">
+            <div class="profile__edit">
+              <h1 class="profile__name">Жак-Ив Кусто</h1>
+              <button class="profile__edit-button" type="button"></button>
+            </div>
+            <p class="profile__description">Исследователь океана</p>
+          </div>
         </div>
-      </template>
-    </section>
-  </main>
-  <footer class="footer">
-    <p class="footer__copyright">© 2023 Mesto Russia</p>
-  </footer>
-</body>
-
+        <button class="profile__add-button" type="button"></button>
+      </section>
+      <section class="elements">
+        <template class="template">
+          <div class="elements__card">
+            <img class="elements__image" alt="" />
+            <div class="elements__description">
+              <h2 class="elements__name"></h2>
+              <div class="elements__like">
+                <button class="elements__icon" type="button"></button>
+                <span class="elements__quantity"></span>
+              </div>
+            </div>
+            <button class="elements__delete" type="button"></button>
+          </div>
+        </template>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2023 Mesto Russia</p>
+    </footer>
+  </body>
 </html>

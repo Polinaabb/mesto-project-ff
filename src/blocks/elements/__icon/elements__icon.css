@@ -1,17 +1,17 @@
 .elements__icon {
-    width: 22px;
-    height: 19px;
-    background-image: url(../../../images/element-icon.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    background-color: transparent;
-    cursor: pointer;
-    border: none;
-    margin-top: 20px;
-    flex-shrink: 0;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/element-icon.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  flex-shrink: 0;
 }
 
 .elements__icon:hover {
-    opacity: 0.5;
+  opacity: 0.5;
 }

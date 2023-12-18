@@ -1,11 +1,10 @@
-export function openPopup(popupEditProfile) {
-  popupEditProfile.classList.add("popup_opened");
+export function openPopup(popup) {
+  popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupByEsc);
 }
 
-export function closePopup(popupEditProfile) {
-  popupEditProfile.classList.remove("popup_opened");
-  document.addEventListener("keydown", closePopupByEsc);
+export function closePopup(popup) {
+  popup.classList.remove("popup_opened");
 }
 
 function closePopupByEsc(evt) {
@@ -17,7 +16,6 @@ function closePopupByEsc(evt) {
 
 export function closePopupByOverlayClick(evt) {
   if (evt.target.classList.contains("popup")) {
-    closePopup(evt.target)
+    closePopup(evt.target);
   }
 }
-
