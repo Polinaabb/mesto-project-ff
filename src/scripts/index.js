@@ -29,7 +29,7 @@ const linkInput = document.querySelector(".popup__fieled_type_link");
 const formEditProfile = document.querySelector(".popup__container-edit");
 const formAddCard = document.querySelector(".popup__container-add");
 const formAvatarProfile = document.querySelector(".popup__container-avatar");
-const closeList = document.querySelectorAll(".popup__close");
+const closeButtonList = document.querySelectorAll(".popup__close");
 const avatarInput = document.querySelector(".popup__fieled_type_avatar");
 let userId = ''; 
 let userAvatar = '';
@@ -86,6 +86,7 @@ function handleFormSubmitAvatar(evt) {
   updateAvatar({ avatar: avatarInput.value })
   .then((data) => {
     profileAvatar.style = `background-image: url(${data.avatar})`;
+    userAvatar = data.avatar;
     closePopup(popupAvatarProfile);
   })
   .catch((err) => {
@@ -104,11 +105,10 @@ const likeCard = (id, isLiked, updateLikes) => {
   })
  }
  
-const onDelete = (id, card) => {
-  console.log(card)
-  removeCard(id, card)
+const onDelete = (id, deleteCard) => {
+  removeCard(id)
     .then((data) => {
-      data.card.remove();
+      deleteCard(data);
     })
     .catch((err) => {
       console.log(err);
@@ -140,7 +140,7 @@ const openPopupAdd = function () {
   clearValidation(popupAddCard, validationSettings);
 };
 
-closeList.forEach(button => {
+closeButtonList.forEach(button => {
   const buttonsPopup = button.closest('.popup');
   button.addEventListener('click', () => closePopup(buttonsPopup));
 });
